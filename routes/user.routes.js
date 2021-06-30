@@ -1,8 +1,15 @@
 const express = require("express");
 const userRouter = express.Router();
-const {getAllUsers} = require('../controllers/user.controller');
+const {userParamHandler} = require ("../controllers/params.controller");
+const {updateUserDetails} = require("../controllers/user.controller");
 
-userRouter.route('/')
-    .get(getAllUsers);
+userRouter.route("userId",userParamHandler);
+
+userRouter.route("/:userId")
+    .post(updateUserDetails);
+
+
+// userRouter.route('/')
+//     .get(getAllUsers);
 
 module.exports = { userRouter } ;

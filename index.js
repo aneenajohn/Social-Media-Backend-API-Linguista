@@ -29,9 +29,8 @@ app.get('/',(req,res)=> {
     res.json({api:"This is an API for linguista social media app"});
 })
 
-app.use('/users',userRouter);
 app.use('/auth',verifyAuth);
-
+app.use('/users',userRouter);
 // ERROR HANDLER & 404s This should be the last route,Keep it here dont move
 app.use(errorHandler);
 app.use(routeNotFound);

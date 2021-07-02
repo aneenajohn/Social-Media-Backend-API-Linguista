@@ -1,5 +1,5 @@
 const { extend } = require("lodash");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const User = require("../models/user.model");
 
 

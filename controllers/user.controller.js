@@ -2,6 +2,7 @@ const { extend } = require("lodash");
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
 
+
 const getUser = async (req,res) => {
     try{
         const {user} = req;

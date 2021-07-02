@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model");
-// const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 const getAllUsers = (req,res) => {
     res.send("user route");
@@ -58,18 +58,18 @@ const loginUser = async (req, res) => {
           message: "Wrong credentials, Please check and try again.",
         });
       }
-    //   const token = jwt.sign(
-    //     {
-    //       userId: user._id,
-    //       expiry: "24h",
-    //     },
-    //     process.env.secret
-    //   );
+      const token = jwt.sign(
+        {
+          userId: user._id,
+          expiry: "24h",
+        },
+        process.env.secret
+      );
       res
         .status(201)
         .json({ 
           success: true, 
-        //   token, 
+          token, 
           message:"Successfully LoggedIn" ,
           user
         });

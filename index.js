@@ -11,7 +11,8 @@ const {initializeDBConnection} = require("./db/db.js");
 const {userRouter} = require("./routes/user.routes");
 const {postRouter} = require("./routes/post.routes");
 
-const{verifyAuth} = require("./middlewares/verifyAuth");
+const{verifyAuth} = require("./routes/verifyAuth");
+const {validateAuth} = require("./middlewares/validateAuth");
 const {errorHandler }  = require("./middlewares/error-handler.middleware.js");
 const {routeNotFound} = require("./middlewares/404-route-handler.middleware.js");
 
@@ -31,10 +32,9 @@ app.get('/',(req,res)=> {
     res.json({api:"This is an API for linguista social media app"});
 })
 
-
 app.use('/auth',verifyAuth);
-app.use('/users',userRouter);
-app.use('/post',postRouter);
+app.use('/users',validateAuth,userRouter);
+app.use('/post',validateAuth,postRouter);
 
 // ERROR HANDLER & 404s This should be the last route,Keep it here dont move
 app.use(errorHandler);

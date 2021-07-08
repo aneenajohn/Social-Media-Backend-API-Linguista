@@ -84,13 +84,15 @@ const likeDislikePost = async (req,res) => {
             await post.updateOne({ $push: { likes: userId } });
             return res.status(200).json({
                 success:true,
-                message:"The post has been liked"
+                message:"The post has been liked",
+                post
             });
           } 
         await post.updateOne({ $pull: { likes: userId } });
         return res.status(200).json({
             success:false,
-            message:"The post has been disliked"
+            message:"The post has been disliked",
+            post
         });
     }
     catch (err) {

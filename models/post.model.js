@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const PostSchema = new mongoose.Schema(
+const PostSchema = new Schema(
   {
     userId: {
       type: String,
@@ -18,26 +19,11 @@ const PostSchema = new mongoose.Schema(
       type: String,
     },
     reactions:{
-      likes: {
-        type: Array,
-        default: [],
-      },
-      hooray:{
-        type: Array,
-        default: [],
-      },
-      heart:{
-        type: Array,
-        default: [],
-      },
-      rocket:{
-        type: Array,
-        default: [],
-      },
-      eyes:{
-        type: Array,
-        default: [],
-      }
+      thumbsUp:[Schema.Types.ObjectId],
+      hooray:[Schema.Types.ObjectId],
+      heart:[Schema.Types.ObjectId],
+      rocket:[Schema.Types.ObjectId],
+      eyes:[Schema.Types.ObjectId],
     }
   },
   { timestamps: true }

@@ -77,26 +77,97 @@ const deletePost = async (req,res) => {
 }
 
 const likeDislikePost = async (req,res) => {
+
     try{
         const {post} = req;
-        const {userId} = req.body;
-        if (!post.reactions.likes.includes(userId)) {
-            await post.updateOne({ $push: { reactions: {likes: userId}  } });
-            return res.status(200).json({
-                success:true,
-                message:"The post has been liked",
-                post
-            });
-          } 
-        await post.reactions.updateOne({ $pull: { likes: userId } });
-        return res.status(200).json({
-            success:false,
-            message:"The post has been disliked",
-            post
-        });
+        const {userId,reaction} = req.body;
+        const userReacted = post.reactions[reaction].includes(userId);
+
+        let updatedPostReaction;
+
+        if (userReacted) {
+            switch (reaction) {
+              case "thumbsUp":
+               updatedPostReaction = await Post.updateOne(
+                  { _id: post._id },
+                  { $pull: { "reactions.thumbsUp": userId } }
+                );
+                break;
+      
+              case "hooray":
+                updatedPostReaction = await Post.updateOne(
+                  { _id: post._id },
+                  { $pull: { "reactions.hooray": userId } }
+                );
+                break;
+
+              case "heart":
+                updatedPostReaction = await Post.updateOne(
+                      { _id: post._id },
+                      { $pull: { "reactions.heart": userId } }
+                    );
+                    break;
+            
+              case "rocket":
+                updatedPostReaction = await Post.updateOne(
+                  { _id: post._id },
+                  { $pull: { "reactions.rocket": userId } }
+                );
+                break;
+
+              case "eyes":
+                updatedPostReaction =   await Post.updateOne(
+                        { _id: post._id },
+                        { $pull: { "reactions.eyes": userId } }
+                    );
+                    break;
+            }
+        }
+        else {
+            switch (reaction) {
+              case "thumbsUp":
+                updatedPostReaction = await Post.updateOne(
+                  { _id: post._id },
+                  { $push: { "reactions.thumbsUp": userId } }
+                );
+                break;
+      
+              case "hooray":
+                updatedPostReaction = await Post.updateOne(
+                  { _id: post._id },
+                  { $push: { "reactions.hooray": userId } }
+                );
+                break;
+
+              case "heart":
+                 updatedPostReaction =   await Post.updateOne(
+                      { _id: post._id },
+                      { $push: { "reactions.heart": userId } }
+                    );
+                    break;
+
+              case "rocket":
+                 updatedPostReaction = await Post.updateOne(
+                    { _id: post._id },
+                    { $push: { "reactions.rocket": userId } }
+                );
+                break;
+
+              case "eyes":
+                 updatedPostReaction = await Post.updateOne(
+                    { _id: post._id },
+                    { $push: { "reactions.eyes": userId } }
+                );
+                break;
+            }
+        }
+        res.json({ 
+            success:true,
+            message: "You reacted to the post",
+         });
     }
     catch (err) {
-        res.json({
+        res.status(500).json({
           success: false,
           errorMessage: err.message,
         });

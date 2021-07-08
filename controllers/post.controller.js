@@ -81,7 +81,7 @@ const likeDislikePost = async (req,res) => {
         const {post} = req;
         const {userId} = req.body;
         if (!post.reactions.likes.includes(userId)) {
-            await post.updateOne({ $push: { "reactions.$.likes": userId } });
+            await post.updateOne({ $push: { reactions: {likes: userId}  } });
             return res.status(200).json({
                 success:true,
                 message:"The post has been liked",

@@ -6,6 +6,10 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    title:{
+      type:String,
+      required:true,
+    },
     description: {
       type: String,
       max: 500,
@@ -13,10 +17,28 @@ const PostSchema = new mongoose.Schema(
     image: {
       type: String,
     },
-    likes: {
-      type: Array,
-      default: [],
-    },
+    reactions:{
+      likes: {
+        type: Array,
+        default: [],
+      },
+      hooray:{
+        type: Array,
+        default: [],
+      },
+      heart:{
+        type: Array,
+        default: [],
+      },
+      rocket:{
+        type: Array,
+        default: [],
+      },
+      eyes:{
+        type: Array,
+        default: [],
+      }
+    }
   },
   { timestamps: true }
 );

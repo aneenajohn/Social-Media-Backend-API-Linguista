@@ -80,7 +80,7 @@ const likeDislikePost = async (req,res) => {
     try{
         const {post} = req;
         const {userId} = req.body;
-        if (!post.likes.includes(userId)) {
+        if (!post.reactions.likes.includes(userId)) {
             await post.updateOne({ $push: { likes: userId } });
             return res.status(200).json({
                 success:true,

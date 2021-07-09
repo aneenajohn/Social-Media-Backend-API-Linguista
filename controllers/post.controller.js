@@ -178,11 +178,11 @@ const getPost = async (req,res) => {
     try{
         const {post} = req;
         res.status(200).json({
-            success:false,
+            success:true,
             post
         });
     }catch (err) {
-        res.json({
+        res.status(500).json({
           success: false,
           errorMessage: err.message,
         });

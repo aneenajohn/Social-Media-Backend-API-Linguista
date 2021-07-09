@@ -8,7 +8,7 @@ postRouter.route("/")
     .post(createPost)
 
 postRouter.route("/timeline")
-    .get(getAllTimelinePost)
+    .post(getAllTimelinePost)
 
 postRouter.param("postId",postParamHandler);
 

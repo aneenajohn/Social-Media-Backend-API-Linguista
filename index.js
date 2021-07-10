@@ -20,7 +20,7 @@ dotenv.config();
 const app = express();
 const PORT= 8005;
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 initializeDBConnection();
 

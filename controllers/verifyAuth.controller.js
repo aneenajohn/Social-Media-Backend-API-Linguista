@@ -2,8 +2,20 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 
-const getAllUsers = (req,res) => {
-    res.send("user route");
+const getAllUsers = async (req,res) => {
+  try{
+    const users = await User.find({});
+    res.status(200).json({
+      success: true,
+      users,
+    });
+  }
+  catch (err) {
+    res.json({
+      success: false,
+      errorMessage: err.message,
+    });
+  };
 }
 
 const registerUser = async (req,res) => {  

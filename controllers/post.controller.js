@@ -38,9 +38,9 @@ const updatePost = async(req,res) => {
             })
         }
         return res.status(403).json({
-                                success:false,
-                                errorMessage:"you dont have access to update others post"
-                            });
+                    success:false,
+                    errorMessage:"you dont have access to update others post"
+                });
     }
     catch(err){
         res.json({

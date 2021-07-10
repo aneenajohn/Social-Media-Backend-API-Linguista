@@ -2,6 +2,21 @@ const { extend } = require("lodash");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user.model");
 
+const getAllUsers = async (req,res) => {
+  try{
+    const users = await User.find({});
+    res.status(200).json({
+      success: true,
+      users,
+    });
+  }
+  catch (err) {
+    res.json({
+      success: false,
+      errorMessage: err.message,
+    });
+  };
+}
 
 const getUser = async (req,res) => {
     try{
@@ -158,4 +173,4 @@ const followUser = async (req, res) => {
 
 
 
-module.exports = {updateUserDetails,deleteUser,getUser,followUser,unfollowUser}
+module.exports = {getAllUsers,updateUserDetails,deleteUser,getUser,followUser,unfollowUser}

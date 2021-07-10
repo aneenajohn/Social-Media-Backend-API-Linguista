@@ -1,7 +1,10 @@
 const express = require("express");
 const userRouter = express.Router();
 const {userParamHandler} = require ("../controllers/params.controller");
-const {getUser,updateUserDetails,deleteUser,followUser,unfollowUser} = require("../controllers/user.controller");
+const {getAllUsers,getUser,updateUserDetails,deleteUser,followUser,unfollowUser} = require("../controllers/user.controller");
+
+userRouter.route("/")
+    .get(getAllUsers);
 
 userRouter.param("userId",userParamHandler);
 
